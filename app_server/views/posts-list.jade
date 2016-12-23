@@ -1,0 +1,25 @@
+extends layout
+
+include _includes/sharedHTMLfunctions
+
+block content
+  #banner.page-header
+    .row
+      .col-lg-6
+        h1= pageHeader.title
+         small &nbsp;#{pageHeader.strapline}
+  .row
+    .col-xs-12.col-sm-8(ng-controller="postListCtrl")
+      .row.list-group
+        .col-xs-12.list-group-item(ng-repeat="post in data.posts")
+          h4 
+            a(href="/post/{{ post._id }}") {{ post.title }}
+            small.rating-stars(rating-stars, rating="location.author")
+            //- small
+            //-   rating-stars(rating="location.rating")
+            span.badge.pull-right.badge-default {{ post.createdOn}}
+          h4 
+            {{ post.content }}
+          p
+    .col-xs-12.col-sm-4 
+      p.lead= sidebar
